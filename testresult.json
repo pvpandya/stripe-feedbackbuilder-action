@@ -1,0 +1,253 @@
+{
+    "stats": {
+      "suites": 3,
+      "tests": 6,
+      "passes": 3,
+      "pending": 0,
+      "failures": 3,
+      "start": "2021-11-24T21:34:30.188Z",
+      "end": "2021-11-24T21:34:51.925Z",
+      "duration": 21737,
+      "testsRegistered": 6,
+      "passPercent": 50,
+      "pendingPercent": 0,
+      "other": 0,
+      "hasOther": false,
+      "skipped": 0,
+      "hasSkipped": false
+    },
+    "results": [
+      {
+        "uuid": "cfd85fa0-4865-4765-b756-3894350bdd52",
+        "title": "",
+        "fullFile": "cypress/integration/payments_checkout.js",
+        "file": "cypress/integration/payments_checkout.js",
+        "beforeHooks": [],
+        "afterHooks": [],
+        "tests": [],
+        "suites": [
+          {
+            "uuid": "1ffcf6f9-cb82-4a78-ace9-d8af4b582a4d",
+            "title": "Payments Checkout Basic Setup",
+            "fullFile": "",
+            "file": "",
+            "beforeHooks": [],
+            "afterHooks": [],
+            "tests": [
+              {
+                "title": "visits page /concerts by url",
+                "fullTitle": "Payments Checkout Basic Setup visits page /concerts by url",
+                "timedOut": null,
+                "duration": 1584,
+                "state": "passed",
+                "speed": "slow",
+                "pass": true,
+                "fail": false,
+                "pending": false,
+                "context": null,
+                "code": "cy.visit(url + \"/concert\");",
+                "err": {},
+                "uuid": "8e6a7da7-4d55-4e43-815b-74d233b77c2a",
+                "parentUUID": "1ffcf6f9-cb82-4a78-ace9-d8af4b582a4d",
+                "isHook": false,
+                "skipped": false
+              },
+              {
+                "title": "visits page /concerts by clicking navbar",
+                "fullTitle": "Payments Checkout Basic Setup visits page /concerts by clicking navbar",
+                "timedOut": null,
+                "duration": 837,
+                "state": "passed",
+                "speed": "slow",
+                "pass": true,
+                "fail": false,
+                "pending": false,
+                "context": null,
+                "code": "cy.visit(url);\ncy.contains(\"Concert Tickets\").click();",
+                "err": {},
+                "uuid": "4edae53a-b651-460d-8630-383de6197c9f",
+                "parentUUID": "1ffcf6f9-cb82-4a78-ace9-d8af4b582a4d",
+                "isHook": false,
+                "skipped": false
+              },
+              {
+                "title": "visits page /concerts by clicking button",
+                "fullTitle": "Payments Checkout Basic Setup visits page /concerts by clicking button",
+                "timedOut": null,
+                "duration": 157,
+                "state": "passed",
+                "speed": "slow",
+                "pass": true,
+                "fail": false,
+                "pending": false,
+                "context": null,
+                "code": "cy.visit(url);\ncy.get(\"#concert\").click();",
+                "err": {},
+                "uuid": "8581bf44-b483-4906-a209-b596832f1593",
+                "parentUUID": "1ffcf6f9-cb82-4a78-ace9-d8af4b582a4d",
+                "isHook": false,
+                "skipped": false
+              },
+              {
+                "title": "1.2.3",
+                "fullTitle": "Payments Checkout Basic Setup Adds 2 tickets (3 total)",
+                "timedOut": null,
+                "duration": 274,
+                "state": "failed",
+                "speed": null,
+                "pass": false,
+                "fail": true,
+                "pending": false,
+                "context": null,
+                "code": "cy.visit(url + \"/concert\");\ncy.get(\"#add\").click();\ncy.get(\"#add\").click();\ncy.get(\"#quantity-input\").should(\"have.value\", 3);",
+                "err": {
+                  "message": "SyntaxError: The following error originated from your application code, not from Cypress.\n\n  > Unexpected token B in JSON at position 0\n\nWhen Cypress detects uncaught errors originating from your application it will automatically fail the current test.\n\nThis behavior is configurable, and you can choose to turn this off by listening to the `uncaught:exception` event.\n\nhttps://on.cypress.io/uncaught-exception-from-application",
+                  "estack": "SyntaxError: The following error originated from your application code, not from Cypress.\n\n  > Unexpected token B in JSON at position 0\n\nWhen Cypress detects uncaught errors originating from your application it will automatically fail the current test.\n\nThis behavior is configurable, and you can choose to turn this off by listening to the `uncaught:exception` event.\n\nhttps://on.cypress.io/uncaught-exception-from-application\n    at JSON.parse (<anonymous>)\n    at http://localhost:4242/assets/js/translation.js:34:22\n    at NodeList.forEach (<anonymous>)\n    at updateContent (http://localhost:4242/assets/js/translation.js:31:46)\n    at http://localhost:4242/assets/js/translation.js:46:3\n    at https://unpkg.com/i18next/i18next.js:250:22\n    at Array.forEach (<anonymous>)\n    at I18n.emit (https://unpkg.com/i18next/i18next.js:249:18)\n    at done (https://unpkg.com/i18next/i18next.js:2591:20)\n    at Object.callback (https://unpkg.com/i18next/i18next.js:2620:13)",
+                  "diff": null
+                },
+                "uuid": "4db8c0db-f21a-4e16-9887-4eb7a6668d94",
+                "parentUUID": "1ffcf6f9-cb82-4a78-ace9-d8af4b582a4d",
+                "isHook": false,
+                "skipped": false
+              }
+            ],
+            "suites": [],
+            "passes": [
+              "8e6a7da7-4d55-4e43-815b-74d233b77c2a",
+              "4edae53a-b651-460d-8630-383de6197c9f",
+              "8581bf44-b483-4906-a209-b596832f1593"
+            ],
+            "failures": [
+              "4db8c0db-f21a-4e16-9887-4eb7a6668d94"
+            ],
+            "pending": [],
+            "skipped": [],
+            "duration": 2852,
+            "root": false,
+            "rootEmpty": false,
+            "_timeout": 2000
+          },
+          {
+            "uuid": "fd4a801a-0bf5-40eb-a983-f0ba2a605b9d",
+            "title": "Payments Checkout Payment Flow",
+            "fullFile": "",
+            "file": "",
+            "beforeHooks": [],
+            "afterHooks": [],
+            "tests": [
+              {
+                "title": "Renders Stripe Checkout and payment succeeds",
+                "fullTitle": "Payments Checkout Payment Flow Renders Stripe Checkout and payment succeeds",
+                "timedOut": null,
+                "duration": 9339,
+                "state": "failed",
+                "speed": null,
+                "pass": false,
+                "fail": true,
+                "pending": false,
+                "context": null,
+                "code": "cy.visit(url + \"/concert\");\nvar ccNumber = \"4242424242424242\";\nvar month = \"12\";\nvar year = \"30\";\nvar cvc = \"123\";\nvar zipCode = \"90210\";\ncy.get(\"#submit\").click();\ncy.wait(5000);\nvar randomizedName = Math.floor(Math.random() * 10000);\ncy.get(\"#email\").type(\"auto-\".concat(randomizedName, \"@stripecert.org\"));\ncy.get(\"#cardNumber\").type(\"4242424242424242\");\ncy.get(\"#cardExpiry\").type(\"1226\");\ncy.get(\"#cardCvc\").type(\"123\");\ncy.get(\"#billingName\").type(\"Auto Grader \" + randomizedName);\ncy.get(\"form\").submit();\ncy.wait(10000);\ncy.get(\".payment-summary\").contains(\"Your payment succeeded\");",
+                "err": {
+                  "message": "AssertionError: Timed out retrying: Expected to find element: `#email`, but never found it.",
+                  "estack": "AssertionError: Timed out retrying: Expected to find element: `#email`, but never found it.\n    at Context.eval (http://localhost:4242/__cypress/tests?p=cypress/integration/payments_checkout.js:132:8)",
+                  "diff": null
+                },
+                "uuid": "f1d34aa6-daaa-413c-9fdc-d9ebd345503b",
+                "parentUUID": "fd4a801a-0bf5-40eb-a983-f0ba2a605b9d",
+                "isHook": false,
+                "skipped": false
+              }
+            ],
+            "suites": [],
+            "passes": [],
+            "failures": [
+              "f1d34aa6-daaa-413c-9fdc-d9ebd345503b"
+            ],
+            "pending": [],
+            "skipped": [],
+            "duration": 9339,
+            "root": false,
+            "rootEmpty": false,
+            "_timeout": 2000
+          },
+          {
+            "uuid": "d455a359-2c1d-4c0e-81f5-e54697e8e0b3",
+            "title": "Payments Checkout Back Flow",
+            "fullFile": "",
+            "file": "",
+            "beforeHooks": [],
+            "afterHooks": [],
+            "tests": [
+              {
+                "title": "Clicking Back returns to Concerts Page",
+                "fullTitle": "Payments Checkout Back Flow Clicking Back returns to Concerts Page",
+                "timedOut": null,
+                "duration": 9399,
+                "state": "failed",
+                "speed": null,
+                "pass": false,
+                "fail": true,
+                "pending": false,
+                "context": null,
+                "code": "cy.visit(url + \"/concert\");\ncy.get(\"#add\").click();\ncy.get(\"#submit\").click();\ncy.wait(5000);\ncy.get(\".Header-businessLink-label\").click();\ncy.get(\"body\").contains(\"Annual Spring Academy Concert\");",
+                "err": {
+                  "message": "AssertionError: Timed out retrying: Expected to find element: `.Header-businessLink-label`, but never found it.",
+                  "estack": "AssertionError: Timed out retrying: Expected to find element: `.Header-businessLink-label`, but never found it.\n    at Context.eval (http://localhost:4242/__cypress/tests?p=cypress/integration/payments_checkout.js:148:8)",
+                  "diff": null
+                },
+                "uuid": "89b26713-c3b5-40b4-9fc1-2c0adebee90b",
+                "parentUUID": "d455a359-2c1d-4c0e-81f5-e54697e8e0b3",
+                "isHook": false,
+                "skipped": false
+              }
+            ],
+            "suites": [],
+            "passes": [],
+            "failures": [
+              "89b26713-c3b5-40b4-9fc1-2c0adebee90b"
+            ],
+            "pending": [],
+            "skipped": [],
+            "duration": 9399,
+            "root": false,
+            "rootEmpty": false,
+            "_timeout": 2000
+          }
+        ],
+        "passes": [],
+        "failures": [],
+        "pending": [],
+        "skipped": [],
+        "duration": 0,
+        "root": true,
+        "rootEmpty": true,
+        "_timeout": 2000
+      }
+    ],
+    "meta": {
+      "mocha": {
+        "version": "7.0.1"
+      },
+      "mochawesome": {
+        "options": {
+          "quiet": false,
+          "reportFilename": "mochawesome",
+          "saveHtml": true,
+          "saveJson": true,
+          "consoleReporter": "spec",
+          "useInlineDiffs": false,
+          "code": true
+        },
+        "version": "7.0.1"
+      },
+      "marge": {
+        "options": {
+          "reportDir": "cypress/results",
+          "overwrite": false,
+          "html": true,
+          "json": true
+        },
+        "version": "6.0.1"
+      }
+    }
+  }

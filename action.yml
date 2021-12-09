@@ -1,0 +1,13 @@
+name: 'FeedbackBuilder'
+description: 'Structured logger, parser, and string builder built on rubricca to provide human-written feedback at machine-readable speeds'
+inputs:
+  base-directory:  # id of input
+    description: 'Base directory of location of the test logs!'
+    required: true
+    default: ''
+outputs:
+  time: # id of output
+    description: 'The time we greeted you'
+runs:
+  using: 'node12'
+  main: 'dist/index.js'

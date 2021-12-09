@@ -1,0 +1,31 @@
+name: main
+on: 
+  push:
+    branches: [ main ]
+# Allows you to run this workflow manually from the Actions tab
+  workflow_dispatch:
+
+jobs:
+  copy_json_content:
+    runs-on: ubuntu-latest
+    name: A Job to build the Feedback Report merging test results and rubric file
+    steps:
+      # To use this repository's private action,
+      # you must check out the repository
+      - name: Checkout
+        uses: actions/checkout@v2
+      
+      - name: Generate Feedback Report
+        uses: ./ # Uses an action in the root directory
+        id: feedbackReport
+        with:
+          base-directory: ${{github.workspace}}
+      # Use the output from the `hello` step
+      - name: Feedback Report Result
+        run: echo "${{ steps.feedbackReport.outputs.result }}"
+
+      - name: Commit changes
+        uses: EndBug/add-and-commit@v7
+        with:
+          message: 'Commit the Feedback Report file to the Repo'
+          add: '*.json'
