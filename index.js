@@ -28,6 +28,9 @@ async function updateTestResultsInRubricFile(baseDirectory, testResultFile, rubr
   sourceJson.results[0].suites[0].tests.forEach(element => {
     console.log('element:' + JSON.stringify(element));
     console.log('element-title:' + element.title);
+    let destNode = getNodeByItem('1.2.4',destinationJson.items);
+    console.log('dest-Node:' + JSON.stringify(destNode));
+    
     if(destinationJson.items.hasOwnProperty(element.title)) {
       destinationJson.items[element.title].learner_prompt = element.fullTitle;
       destinationJson.items[element.title].graded_assertion = element.pass;
@@ -46,4 +49,15 @@ async function updateTestResultsInRubricFile(baseDirectory, testResultFile, rubr
   destinationData = await fs.readFile(baseDirectory + destination);
   console.log('after write: '+destinationData);
   core.setOutput("result", "Successfully Generated the Feedback Report");
+}
+
+function getNodeByItem(item, node){
+  var reduce = [].reduce;
+  function runner(result, node){
+      if(result || !node) return result;
+      return node.item === id && node || //is this the proper node?
+          runner(null, node.children) || //process this nodes children
+          reduce.call(Object(node), runner, result);  //maybe this is some ArrayLike Structure
+  }
+  return runner(null, node);
 }
