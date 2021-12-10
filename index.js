@@ -3,23 +3,40 @@ const github = require('@actions/github');
 const fs = require('fs').promises;
 
 try {
-  const baseDirectory = core.getInput('base-directory');
-  let rubricFileName = 'rubric.json';
-  let testResultFile = 'testresult.json';
+  const rubricfile = core.getInput('rubricfile', { required: true });
+  const testresultfile = core.getInput('testresultfile', { required: true });
+  const outputfolder = core.getInput('outputfolder', { required: true });
+  console.log('rubricfile::' + rubricfile);
+  console.log('testresultfile::' + testresultfile);
+  console.log('outputfolder::' + outputfolder);
+  core.setOutput('success', 'false');
+  if (!rubricfile) {
+    core.error('rubricfile was not set');
+  }
+  // if (!fs.existsSync(rubricfile)) {
+  //   core.setFailed(rubricfile + ' does not exist.'); 
+  // }
+  // if (!fs.existsSync(testresultfile)) {
+  //   throw new Error(testresultfile + ' does not exist.');
+  // }
+  // if (!fs.existsSync(outputfolder)) {
+  //   throw new Error(outputfolder + ' does not exist.');
+  // }  
   //Parse rubric file and add test results
-  updateTestResultsInRubricFile(baseDirectory, testResultFile, rubricFileName);
+  updateTestResultsInrubricfile(testresultfile, rubricfile, outputfolder);
+  core.setOutput('success', 'true');
 } catch (error) {
   core.setFailed(error.message);
 }
 
-async function updateTestResultsInRubricFile(baseDirectory, testResultFile, rubricFileName) {
+async function updateTestResultsInrubricfile(testresultfile, rubricfile, outputfolder) {
   //Read Rubric File
 
-  let sourceData = await fs.readFile(baseDirectory + '/' + testResultFile);
+  let sourceData = await fs.readFile(testresultfile);
   let sourceJson = JSON.parse(sourceData);
 
   //Read Test Result file
-  let destinationData = await fs.readFile(baseDirectory + '/' + rubricFileName);
+  let destinationData = await fs.readFile(rubricfile);
   let destinationJson = JSON.parse(destinationData);
   let currentTime = Date.now();
   destinationJson.created = currentTime;
@@ -33,14 +50,13 @@ async function updateTestResultsInRubricFile(baseDirectory, testResultFile, rubr
     })
   })
 
-  let destinationFileName = baseDirectory + '/feedbackreport_' + currentTime + '.json';
+  let destinationFileName = outputfolder + '/feedbackReport_' + currentTime + '.json';
 
   //write to destination file
   await fs.writeFile(destinationFileName, JSON.stringify(destinationJson, null, 5));
 
   //Read the updated destination file
-  destinationData = await fs.readFile(baseDirectory + destinationFileName);
-  core.setOutput("result", "Success");
+  destinationData = await fs.readFile(outputfolder + destinationFileName);
 }
 
 const findItemById = (id, items) => {

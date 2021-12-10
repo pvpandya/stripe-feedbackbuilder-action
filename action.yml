@@ -1,13 +1,21 @@
 name: 'FeedbackBuilder'
 description: 'Structured logger, parser, and string builder built on rubricca to provide human-written feedback at machine-readable speeds'
 inputs:
-  base-directory:  # id of input
-    description: 'Base directory of location of the test logs!'
+  rubricfile:  
+    description: 'Rubric File location'
     required: true
-    default: ''
+    default: 'rubric.json'
+  testresultfile:  
+    description: 'Test Result Log File location'
+    required: true
+    default: 'stripetestresult.json'
+  outputfolder:  
+    description: 'Output Feedback File Folder location'
+    required: true
+    default: './'
 outputs:
-  time: # id of output
-    description: 'The time we greeted you'
+  success:
+    description: 'Result Flag'
 runs:
   using: 'node12'
   main: 'dist/index.js'
