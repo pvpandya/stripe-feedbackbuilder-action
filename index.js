@@ -24,17 +24,16 @@ async function updateTestResultsInRubricFile(baseDirectory, testResultFile, rubr
   //Read Test Result file
   let destinationData = await fs.readFile(baseDirectory + '/' + rubricFileName);
   let destinationJson = JSON.parse(destinationData);
-
+  console.log('destinationJson.items:' + JSON.stringify(destinationJson.items));
   sourceJson.results[0].suites[0].tests.forEach(element => {
-    console.log('element:' + JSON.stringify(element));
     console.log('element-title:' + element.title);
-    console.log('destinationJson.items:' + JSON.stringify(destinationJson.items));
     let nodeItem = "1.2.4";
-    var nodeItem2 = element.title.split(":").pop(); 
     let destNode1 = findItemById(nodeItem,destinationJson.items);
     console.log('dest-Node1:' + JSON.stringify(destNode1));
+    var nodeItem2 = element.title.split(":").pop(); 
+    console.log('nodeItem2:' + nodeItem2);
     let destNode2 = findItemById(nodeItem2,destinationJson.items);
-    console.log('dest-Node2:' + JSON.stringify(destNode1));
+    console.log('dest-Node2:' + JSON.stringify(destNode2));
     if(destinationJson.items.hasOwnProperty(element.title)) {
       destinationJson.items[element.title].learner_prompt = element.fullTitle;
       destinationJson.items[element.title].graded_assertion = element.pass;
