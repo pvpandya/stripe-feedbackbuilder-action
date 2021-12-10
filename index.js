@@ -51,11 +51,11 @@ async function updateTestResultsInRubricFile(baseDirectory, testResultFile, rubr
   core.setOutput("result", "Successfully Generated the Feedback Report");
 }
 
-async function getNodeByItem(item, node){
+async function getNodeByItem(id, node){
   var reduce = [].reduce;
   function runner(result, node){
       if(result || !node) return result;
-      return node.item === id && node || //is this the proper node?
+      return node.id === id && node || //is this the proper node?
           runner(null, node.children) || //process this nodes children
           reduce.call(Object(node), runner, result);  //maybe this is some ArrayLike Structure
   }
