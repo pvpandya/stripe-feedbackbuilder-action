@@ -10,13 +10,53 @@
               "Status": ""
           },
           {
-            "id" : "1.2.3",
+            "id" : "1.2.4",
             "learner_prompt": "",
             "graded_assertion": "",
             "helptext": "",
             "err": {},
             "Status": ""
-        }
+          },
+          {
+            "id" : "1.2.5",
+            "learner_prompt": "",
+            "graded_assertion": "",
+            "helptext": "",
+            "err": {},
+            "Status": ""
+          },
+          {
+            "id" : "1.2.6",
+            "learner_prompt": "",
+            "graded_assertion": "",
+            "helptext": "",
+            "err": {},
+            "Status": ""
+          },
+          {
+            "id" : "1.2.7",
+            "learner_prompt": "",
+            "graded_assertion": "",
+            "helptext": "",
+            "err": {},
+            "Status": ""
+          },
+          {
+            "id" : "1.2.8",
+            "learner_prompt": "",
+            "graded_assertion": "",
+            "helptext": "",
+            "err": {},
+            "Status": ""
+          },
+          {
+            "id" : "1.2.9",
+            "learner_prompt": "",
+            "graded_assertion": "",
+            "helptext": "",
+            "err": {},
+            "Status": ""
+          }
         ],
     "labName": "Payments Challenge",
     "sequences": [
