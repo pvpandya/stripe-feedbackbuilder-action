@@ -8474,11 +8474,11 @@ async function updateTestResultsInRubricFile(baseDirectory, testResultFile, rubr
     console.log('element-title:' + element.title);
     console.log('destinationJson.items:' + JSON.stringify(destinationJson.items));
     let nodeItem = "1.2.4";
+    var nodeItem2 = element.title.split(":").pop(); 
     let destNode1 = findItemById(nodeItem,destinationJson.items);
     console.log('dest-Node1:' + JSON.stringify(destNode1));
-    let destNode = getNodeByItem(nodeItem,destinationJson.items);
-    console.log('dest-Node:' + JSON.stringify(destNode));
-    
+    let destNode2 = findItemById(nodeItem2,destinationJson.items);
+    console.log('dest-Node2:' + JSON.stringify(destNode1));
     if(destinationJson.items.hasOwnProperty(element.title)) {
       destinationJson.items[element.title].learner_prompt = element.fullTitle;
       destinationJson.items[element.title].graded_assertion = element.pass;
@@ -8504,16 +8504,6 @@ const findItemById = (id, items) => {
   return items[key]
 }
 
-async function getNodeByItem(id, node){
-  var reduce = [].reduce;
-  function runner(result, node){
-      if(result || !node) return result;
-      return node.id === id && node || //is this the proper node?
-          runner(null, node.children) || //process this nodes children
-          reduce.call(Object(node), runner, result);  //maybe this is some ArrayLike Structure
-  }
-  return runner(null, node);
-}
 })();
 
 module.exports = __webpack_exports__;
