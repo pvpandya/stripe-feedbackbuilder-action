@@ -30,6 +30,8 @@ async function updateTestResultsInRubricFile(baseDirectory, testResultFile, rubr
     console.log('element-title:' + element.title);
     console.log('destinationJson.items:' + JSON.stringify(destinationJson.items));
     let nodeItem = "1.2.4";
+    let destNode1 = findItemById(nodeItem,destinationJson.items);
+    console.log('dest-Node1:' + JSON.stringify(destNode1));
     let destNode = getNodeByItem(nodeItem,destinationJson.items);
     console.log('dest-Node:' + JSON.stringify(destNode));
     
@@ -53,6 +55,10 @@ async function updateTestResultsInRubricFile(baseDirectory, testResultFile, rubr
   core.setOutput("result", "Successfully Generated the Feedback Report");
 }
 
+async function findItemById(id, items) {
+  const key = Object.keys(items).find(item => items[item].id === id)
+  return items[key]
+}
 async function getNodeByItem(id, node){
   var reduce = [].reduce;
   function runner(result, node){
