@@ -28,6 +28,7 @@ async function updateTestResultsInRubricFile(baseDirectory, testResultFile, rubr
   sourceJson.results[0].suites[0].tests.forEach(element => {
     console.log('element:' + JSON.stringify(element));
     console.log('element-title:' + element.title);
+    console.log('destinationJson.items:' + JSON.stringify(destinationJson.items));
     let destNode = getNodeByItem('1.2.4',destinationJson.items);
     console.log('dest-Node:' + JSON.stringify(destNode));
     
