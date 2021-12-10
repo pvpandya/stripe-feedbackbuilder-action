@@ -8447,14 +8447,11 @@ const github = __nccwpck_require__(5438);
 const fs = __nccwpck_require__(5747).promises;
 
 try {
-  // `base-directory` input defined in action metadata file
   const baseDirectory = core.getInput('base-directory');
-  console.log(`Base path:  ${baseDirectory}!`);
   let rubricFileName = 'rubric.json';
   let testResultFile = 'testresult.json';
   //Parse rubric file and add test results
   updateTestResultsInRubricFile(baseDirectory, testResultFile, rubricFileName);
-
 } catch (error) {
   core.setFailed(error.message);
 }
@@ -8468,30 +8465,26 @@ async function updateTestResultsInRubricFile(baseDirectory, testResultFile, rubr
   //Read Test Result file
   let destinationData = await fs.readFile(baseDirectory + '/' + rubricFileName);
   let destinationJson = JSON.parse(destinationData);
-  console.log('destinationJson.items:' + JSON.stringify(destinationJson.items));
-  sourceJson.results[0].suites[0].tests.forEach(element => {
-    console.log('element-title:' + element.title);
-    var nodeItem = element.title.split(":").pop(); 
-    console.log('nodeItem:' + nodeItem);
-    let destNode = findItemById(nodeItem,destinationJson.items);
-    console.log('dest-Node:' + JSON.stringify(destNode));
-
-    destinationJson.items[nodeItem].learner_prompt = element.fullTitle;
-    destinationJson.items[nodeItem].graded_assertion = element.pass;
-    destinationJson.items[nodeItem].err = element.err;
-    destinationJson.items[nodeItem].Status = element.state;
+  let currentTime = Date.now();
+  destinationJson.created = currentTime;
+  sourceJson.results[0].suites.forEach(suite => {
+    suite.tests.forEach(element => {
+      var nodeItem = element.title.split(":").pop(); 
+      destinationJson.items[nodeItem].learner_prompt = element.fullTitle;
+      destinationJson.items[nodeItem].graded_assertion = element.pass;
+      destinationJson.items[nodeItem].err = element.err;
+      destinationJson.items[nodeItem].Status = element.state;
+    })
   })
-  console.log('destination after copy -> '+JSON.stringify(destinationJson));
 
-  let destinationFileName = baseDirectory + '/feedbackreport - ' + Date.now() + '.json';
-  console.log('destination file name -> '+destinationFileName);
+  let destinationFileName = baseDirectory + '/feedbackreport_' + currentTime + '.json';
+
   //write to destination file
-  await fs.writeFile(destinationFileName, JSON.stringify(destinationJson));
+  await fs.writeFile(destinationFileName, JSON.stringify(destinationJson, null, 5));
 
   //Read the updated destination file
-  destinationData = await fs.readFile(baseDirectory + destination);
-  console.log('after write: '+ destinationData);
-  core.setOutput("result", "Successfully Generated the Feedback Report");
+  destinationData = await fs.readFile(baseDirectory + destinationFileName);
+  core.setOutput("result", "Success");
 }
 
 const findItemById = (id, items) => {

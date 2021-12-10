@@ -9,6 +9,10 @@
     "test": "jest",
     "all": "npm run lint && npm run prepare && npm run test"
   },
+  "jest": {
+    "verbose": true,
+    "watchman": false
+  },
   "repository": {
     "type": "git",
     "url": "git+https://github.com/pvpandya/stripe-feedbackbuilder-action.git"
@@ -26,7 +30,7 @@
   },
   "devDependencies": {
     "@vercel/ncc": "^0.31.1",
-    "eslint": "^8.0.0",
-    "jest": "^27.2.5"
+    "eslint": "^8.4.1",
+    "jest": "^27.4.4"
   }
 }
