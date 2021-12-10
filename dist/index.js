@@ -8470,6 +8470,8 @@ async function updateTestResultsInRubricFile(baseDirectory, testResultFile, rubr
   let destinationJson = JSON.parse(destinationData);
 
   sourceJson.results[0].suites[0].tests.forEach(element => {
+    console.log('element:' + JSON.stringify(element));
+    console.log('element-title:' + element.title);
     if(destinationJson.items.hasOwnProperty(element.title)) {
       destinationJson.items[element.title].learner_prompt = element.fullTitle;
       destinationJson.items[element.title].graded_assertion = element.pass;
