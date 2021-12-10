@@ -35,8 +35,8 @@
           "afterHooks": [],
           "tests": [
             {
-              "title": "visits page /concerts by url:1.2.3",
-              "fullTitle": "Payments Checkout Basic Setup visits page /concerts by url:1.2.3",
+              "title": "visits page /concerts by url-1.2.3",
+              "fullTitle": "Payments Checkout Basic Setup visits page /concerts by url-1.2.3",
               "timedOut": null,
               "duration": 580,
               "state": "passed",
@@ -53,8 +53,8 @@
               "skipped": false
             },
             {
-              "title": "Cypress test 123:1.2.4",
-              "fullTitle": "Payments Checkout Basic Setup Cypress test 123:1.2.4",
+              "title": "Cypress test 123-1.2.4",
+              "fullTitle": "Payments Checkout Basic Setup Cypress test 123-1.2.4",
               "timedOut": null,
               "duration": 349,
               "state": "passed",
@@ -71,8 +71,8 @@
               "skipped": false
             },
             {
-              "title": "visits page /concerts by clicking navbar:1.2.5",
-              "fullTitle": "Payments Checkout Basic Setup visits page /concerts by clicking navbar:1.2.5",
+              "title": "visits page /concerts by clicking navbar-1.2.5",
+              "fullTitle": "Payments Checkout Basic Setup visits page /concerts by clicking navbar-1.2.5",
               "timedOut": null,
               "duration": 1219,
               "state": "passed",
@@ -89,8 +89,8 @@
               "skipped": false
             },
             {
-              "title": "visits page /concerts by clicking button:1.2.6",
-              "fullTitle": "Payments Checkout Basic Setup visits page /concerts by clicking button:1.2.6",
+              "title": "visits page /concerts by clicking button-1.2.6",
+              "fullTitle": "Payments Checkout Basic Setup visits page /concerts by clicking button-1.2.6",
               "timedOut": null,
               "duration": 258,
               "state": "passed",
@@ -107,8 +107,8 @@
               "skipped": false
             },
             {
-              "title": "Adds 2 tickets (3 total):1.2.7",
-              "fullTitle": "Payments Checkout Basic Setup Adds 2 tickets (3 total):1.2.7",
+              "title": "Adds 2 tickets (3 total)-1.2.7",
+              "fullTitle": "Payments Checkout Basic Setup Adds 2 tickets (3 total)-1.2.7",
               "timedOut": null,
               "duration": 284,
               "state": "passed",
@@ -150,8 +150,8 @@
           "afterHooks": [],
           "tests": [
             {
-              "title": "Renders Stripe Checkout and payment succeeds:1.2.8",
-              "fullTitle": "Payments Checkout Payment Flow Renders Stripe Checkout and payment succeeds:1.2.8",
+              "title": "Renders Stripe Checkout and payment succeeds-1.2.8",
+              "fullTitle": "Payments Checkout Payment Flow Renders Stripe Checkout and payment succeeds-1.2.8",
               "timedOut": null,
               "duration": 9609,
               "state": "failed",
@@ -193,8 +193,8 @@
           "afterHooks": [],
           "tests": [
             {
-              "title": "Clicking Back returns to Concerts Page:1.2.9",
-              "fullTitle": "Payments Checkout Back Flow Clicking Back returns to Concerts Page:1.2.9",
+              "title": "Clicking Back returns to Concerts Page-1.2.9",
+              "fullTitle": "Payments Checkout Back Flow Clicking Back returns to Concerts Page-1.2.9",
               "timedOut": null,
               "duration": 9663,
               "state": "failed",
