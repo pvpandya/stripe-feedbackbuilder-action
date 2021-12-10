@@ -51,7 +51,7 @@ async function updateTestResultsInRubricFile(baseDirectory, testResultFile, rubr
   core.setOutput("result", "Successfully Generated the Feedback Report");
 }
 
-function getNodeByItem(item, node){
+async function getNodeByItem(item, node){
   var reduce = [].reduce;
   function runner(result, node){
       if(result || !node) return result;
