@@ -8473,7 +8473,8 @@ async function updateTestResultsInRubricFile(baseDirectory, testResultFile, rubr
     console.log('element:' + JSON.stringify(element));
     console.log('element-title:' + element.title);
     console.log('destinationJson.items:' + JSON.stringify(destinationJson.items));
-    let destNode = getNodeByItem('1.2.4',destinationJson.items);
+    let nodeItem = "1.2.4";
+    let destNode = getNodeByItem(nodeItem,destinationJson.items);
     console.log('dest-Node:' + JSON.stringify(destNode));
     
     if(destinationJson.items.hasOwnProperty(element.title)) {
