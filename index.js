@@ -51,14 +51,15 @@ async function updateTestResultsInRubricFile(baseDirectory, testResultFile, rubr
 
   //Read the updated destination file
   destinationData = await fs.readFile(baseDirectory + destination);
-  console.log('after write: '+destinationData);
+  console.log('after write: '+ destinationData);
   core.setOutput("result", "Successfully Generated the Feedback Report");
 }
 
-async function findItemById(id, items) {
+const findItemById = (id, items) => {
   const key = Object.keys(items).find(item => items[item].id === id)
   return items[key]
 }
+
 async function getNodeByItem(id, node){
   var reduce = [].reduce;
   function runner(result, node){
