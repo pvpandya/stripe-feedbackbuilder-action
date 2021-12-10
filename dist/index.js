@@ -8471,21 +8471,15 @@ async function updateTestResultsInRubricFile(baseDirectory, testResultFile, rubr
   console.log('destinationJson.items:' + JSON.stringify(destinationJson.items));
   sourceJson.results[0].suites[0].tests.forEach(element => {
     console.log('element-title:' + element.title);
-    var nodeItem2 = element.title.split(":").pop(); 
-    console.log('nodeItem2:' + nodeItem2);
-    let destNode2 = findItemById(nodeItem2,destinationJson.items);
-    console.log('dest-Node2:' + JSON.stringify(destNode2));
+    var nodeItem = element.title.split(":").pop(); 
+    console.log('nodeItem:' + nodeItem);
+    let destNode = findItemById(nodeItem,destinationJson.items);
+    console.log('dest-Node:' + JSON.stringify(destNode));
 
-    destinationJson.items[nodeItem2].learner_prompt = element.fullTitle;
-    destinationJson.items[nodeItem2].graded_assertion = element.pass;
-    destinationJson.items[nodeItem2].err = element.err;
-    destinationJson.items[nodeItem2].Status = element.state;
-    // if(destinationJson.items.hasOwnProperty(element.title)) {
-    //   destinationJson.items[element.title].learner_prompt = element.fullTitle;
-    //   destinationJson.items[element.title].graded_assertion = element.pass;
-    //   destinationJson.items[element.title].err = element.err;
-    //   destinationJson.items[element.title].Status = element.state;
-    // }
+    destinationJson.items[nodeItem].learner_prompt = element.fullTitle;
+    destinationJson.items[nodeItem].graded_assertion = element.pass;
+    destinationJson.items[nodeItem].err = element.err;
+    destinationJson.items[nodeItem].Status = element.state;
   })
   console.log('destination after copy -> '+JSON.stringify(destinationJson));
 
