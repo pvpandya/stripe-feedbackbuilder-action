@@ -19,12 +19,15 @@ This action builds the structured feedback report for the learner based on rubri
 - uses: pvpandya/stripe-feedbackbuilder-action@v0.1.0-beta
   with:
     # The location of the rubric file that will be used to generate the output.
+    # Default: 'rubric.json'
     rubricfile: ''
 
     # The location of the test result file in mochawesome report in json format that will be used to generate the output.
+    # Default: 'stripetestresult.json'
     testresultfile: ''
 
     # The location of the final output file.
+    # Default: '.'
     outputfolder: ''
 ```
 <!-- end usage -->
