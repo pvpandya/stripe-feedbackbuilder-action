@@ -8457,16 +8457,6 @@ try {
   if (!rubricfile) {
     core.error('rubricfile was not set');
   }
-  // if (!fs.existsSync(rubricfile)) {
-  //   core.setFailed(rubricfile + ' does not exist.'); 
-  // }
-  // if (!fs.existsSync(testresultfile)) {
-  //   throw new Error(testresultfile + ' does not exist.');
-  // }
-  // if (!fs.existsSync(outputfolder)) {
-  //   throw new Error(outputfolder + ' does not exist.');
-  // }  
-  //Parse rubric file and add test results
   updateTestResultsInrubricfile(testresultfile, rubricfile, outputfolder);
   core.setOutput('success', 'true');
 } catch (error) {
@@ -8498,9 +8488,6 @@ async function updateTestResultsInrubricfile(testresultfile, rubricfile, outputf
 
   //write to destination file
   await fs.writeFile(destinationFileName, JSON.stringify(destinationJson, null, 5));
-
-  //Read the updated destination file
-  destinationData = await fs.readFile(outputfolder + destinationFileName);
 }
 
 const findItemById = (id, items) => {

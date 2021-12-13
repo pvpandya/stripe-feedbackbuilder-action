@@ -12,7 +12,7 @@ inputs:
   outputfolder:  
     description: 'Output Feedback File Folder location'
     required: true
-    default: './'
+    default: ''
 outputs:
   success:
     description: 'Result Flag'
