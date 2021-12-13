@@ -8,7 +8,7 @@
   <a href="https://github.com/actions/checkout"><img alt="GitHub Actions status" src="https://github.com/actions/checkout/workflows/test-local/badge.svg"></a>
 </p>
 
-# FeedbackBuilder V0.1.0
+# FeedbackBuilder v0.1.0-beta
 
 This action builds the structured feedback report for the learner based on rubric and test result json file.
 
@@ -16,7 +16,7 @@ This action builds the structured feedback report for the learner based on rubri
 
 <!-- start usage -->
 ```yaml
-- uses: pvpandya/stripe-feedbackbuilder-action@v2
+- uses: pvpandya/stripe-feedbackbuilder-action@v0.1.0-beta
   with:
     # The location of the rubric file that will be used to generate the output.
     rubricfile: ''
