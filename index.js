@@ -2,26 +2,28 @@ const core = require('@actions/core');
 const github = require('@actions/github');
 const fs = require('fs').promises;
 
-try {
-  const rubricfile = core.getInput('rubricfile', { required: true });
-  const testresultfile = core.getInput('testresultfile', { required: true });
-  const outputfolder = core.getInput('outputfolder', { required: true });
-  console.log('rubricfile::' + rubricfile);
-  console.log('testresultfile::' + testresultfile);
-  console.log('outputfolder::' + outputfolder);
-  core.setOutput('success', 'false');
-  if (!rubricfile) {
-    core.error('rubricfile was not set');
+(async () => {
+  try {
+    const rubricfile = core.getInput('rubricfile', { required: true });
+    const testresultfile = core.getInput('testresultfile', { required: true });
+    const outputfolder = core.getInput('outputfolder', { required: true });
+    core.setOutput('success', 'false');
+    if (!rubricfile) {
+      core.error('rubricfile was not set');
+    }
+    let { passtestitems, failedtestitems } = await updateTestResultsInrubricfile(testresultfile, rubricfile, outputfolder);
+    core.setOutput('success', 'true');
+    core.setOutput('passtestitems', passtestitems);
+    core.setOutput('failedtestitems', failedtestitems);
+  } catch (error) {
+    core.setFailed(error.message);
   }
-  updateTestResultsInrubricfile(testresultfile, rubricfile, outputfolder);
-  core.setOutput('success', 'true');
-} catch (error) {
-  core.setFailed(error.message);
-}
+})();
 
 async function updateTestResultsInrubricfile(testresultfile, rubricfile, outputfolder) {
   //Read Rubric File
-
+  let passtestitems = '';
+  let failedtestitems = '';
   let sourceData = await fs.readFile(testresultfile);
   let sourceJson = JSON.parse(sourceData);
 
@@ -37,6 +39,11 @@ async function updateTestResultsInrubricfile(testresultfile, rubricfile, outputf
       destinationJson.items[nodeItem].graded_assertion = element.pass;
       destinationJson.items[nodeItem].err = element.err;
       destinationJson.items[nodeItem].Status = element.state;
+      if (element.pass) {
+        passtestitems += '- [x]' + nodeItem + ' - ' + element.fullTitle + '\n';
+      } else {
+        failedtestitems += '- ' + nodeItem + ' - ' + element.fullTitle + '\n';
+      }
     })
   })
 
@@ -44,6 +51,7 @@ async function updateTestResultsInrubricfile(testresultfile, rubricfile, outputf
 
   //write to destination file
   await fs.writeFile(destinationFileName, JSON.stringify(destinationJson, null, 5));
+  return { passtestitems, failedtestitems }
 }
 
 const findItemById = (id, items) => {

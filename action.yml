@@ -16,6 +16,10 @@ inputs:
 outputs:
   success:
     description: 'Result Flag'
+  passtestitems:
+    description: 'List of test that Passed'
+  failedtestitems:
+    description: 'List of test that did not Passed'
 runs:
   using: 'node12'
   main: 'dist/index.js'
