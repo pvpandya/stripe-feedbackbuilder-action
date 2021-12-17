@@ -14,8 +14,6 @@ inputs:
     required: true
     default: ''
 outputs:
-  success:
-    description: 'Result Flag'
   passtestitems:
     description: 'List of test that Passed'
   failedtestitems:

@@ -7,12 +7,10 @@ const fs = require('fs').promises;
     const rubricfile = core.getInput('rubricfile', { required: true });
     const testresultfile = core.getInput('testresultfile', { required: true });
     const outputfolder = core.getInput('outputfolder', { required: true });
-    core.setOutput('success', 'false');
     if (!rubricfile) {
       core.error('rubricfile was not set');
     }
     let { passtestitems, failedtestitems } = await updateTestResultsInrubricfile(testresultfile, rubricfile, outputfolder);
-    core.setOutput('success', 'true');
     core.setOutput('passtestitems', passtestitems);
     core.setOutput('failedtestitems', failedtestitems);
   } catch (error) {
