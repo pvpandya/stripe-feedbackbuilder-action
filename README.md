@@ -31,7 +31,15 @@ This action builds the structured feedback report for the learner based on rubri
     outputfolder: ''
 ```
 <!-- end usage -->
+# Action generates following Outputs
+```yaml
+    # The String containg marked up list of tests that passed.
+    # Default: 'rubric.json'
+    passtestitems: ''
 
+    # The String containg marked up list of tests that did not passed.
+    failedtestitems: ''
+```
 # License
 
 The scripts and documentation in this project are released under the [MIT License](LICENSE)
