@@ -8,7 +8,7 @@
   <a href="https://github.com/actions/checkout"><img alt="GitHub Actions status" src="https://github.com/actions/checkout/workflows/test-local/badge.svg"></a>
 </p>
 
-# FeedbackBuilder v0.1.0-beta
+# FeedbackBuilder v0.1.5-beta
 
 This action builds the structured feedback report for the learner based on rubric and test result json file.
 
