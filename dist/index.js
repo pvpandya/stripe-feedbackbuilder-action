@@ -8482,7 +8482,7 @@ async function updateTestResultsInrubricfile(testresultfile, rubricfile, outputf
       destinationJson.items[nodeItem].err = element.err;
       destinationJson.items[nodeItem].Status = element.state;
       if (element.pass) {
-        passtestitems += '- [x]' + nodeItem + ' - ' + element.fullTitle + '\n';
+        passtestitems += '- ' + nodeItem + ' - ' + element.fullTitle + '\n';
       } else {
         failedtestitems += '- ' + nodeItem + ' - ' + element.fullTitle + '\n';
       }
