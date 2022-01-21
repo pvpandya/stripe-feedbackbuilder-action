@@ -21,7 +21,9 @@ const fs = require('fs').promises;
 async function updateTestResultsInrubricfile(testresultfile, rubricfile, outputfolder) {
   //Read Rubric File
   let passtestitems = '';
+  let passList = [];
   let failedtestitems = '';
+  let failList = [];
   let sourceData = await fs.readFile(testresultfile);
   let sourceJson = JSON.parse(sourceData);
 
@@ -42,14 +44,24 @@ async function updateTestResultsInrubricfile(testresultfile, rubricfile, outputf
           rubricItem.Status = element.state;
         }
         if (element.pass) {
-          passtestitems += '- ' + nodeItem + ' - ' + element.fullTitle + '\n';
+          passList.push({"id" : nodeItem, "rowId": rubricItem.rowId, "name": element.fullTitle});
         } else {
-          failedtestitems += '- ' + nodeItem + ' - ' + element.fullTitle + '\n';
+          failList.push({"id" : nodeItem, "rowId": rubricItem.rowId, "name": element.fullTitle});
         }
       })
     })
   })
   
+  passList.sort(SortByRowId);
+  failList.sort(SortByRowId);
+  passList.forEach(item => {
+    passtestitems += '- ' + item.id + ' - ' + item.name.split(":").shift() + '\n';
+  })
+
+  failList.forEach(item => {
+    failedtestitems += '- ' + item.id + ' - ' + item.name.split(":").shift() + '\n';
+  })
+
   if (failedtestitems === ""){
     failedtestitems = 'None';
   }
@@ -64,6 +76,10 @@ async function updateTestResultsInrubricfile(testresultfile, rubricfile, outputf
   return { passtestitems, failedtestitems }
 }
 
+//sort by ascending id
+const SortByRowId = (x,y) => {
+  return x.rowId - y.rowId; 
+}
 const findItemById = (id, items) => {
   const key = Object.keys(items).find(item => items[item].id === id)
   return items[key]
