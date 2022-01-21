@@ -30,23 +30,35 @@ async function updateTestResultsInrubricfile(testresultfile, rubricfile, outputf
   let destinationJson = JSON.parse(destinationData);
   let currentTime = Date.now();
   destinationJson.created = currentTime;
-  sourceJson.results[0].suites.forEach(suite => {
-    suite.tests.forEach(element => {
-      var nodeItem = element.title.split(":").pop(); 
-      destinationJson.items[nodeItem].learner_prompt = element.fullTitle;
-      destinationJson.items[nodeItem].graded_assertion = element.pass;
-      destinationJson.items[nodeItem].err = element.err;
-      destinationJson.items[nodeItem].Status = element.state;
-      if (element.pass) {
-        passtestitems += '- ' + nodeItem + ' - ' + element.fullTitle + '\n';
-      } else {
-        failedtestitems += '- ' + nodeItem + ' - ' + element.fullTitle + '\n';
-      }
+  sourceJson.results.forEach(fileresult => {
+    fileresult.suites.forEach(suite => {
+      suite.tests.forEach(element => {
+        var nodeItem = element.title.split(":").pop(); 
+        var rubricItem = destinationJson.items[nodeItem];
+        if (typeof rubricItem !== "undefined") {
+          rubricItem.learner_prompt = element.fullTitle;
+          rubricItem.graded_assertion = element.pass;
+          rubricItem.err = element.err;
+          rubricItem.Status = element.state;
+        }
+        if (element.pass) {
+          passtestitems += '- ' + nodeItem + ' - ' + element.fullTitle + '\n';
+        } else {
+          failedtestitems += '- ' + nodeItem + ' - ' + element.fullTitle + '\n';
+        }
+      })
     })
   })
+  
+  if (failedtestitems === ""){
+    failedtestitems = 'None';
+  }
+
+  if (passtestitems === ""){
+    passtestitems = 'None';
+  }
 
   let destinationFileName = outputfolder + '/feedbackReport_' + currentTime + '.json';
-
   //write to destination file
   await fs.writeFile(destinationFileName, JSON.stringify(destinationJson, null, 5));
   return { passtestitems, failedtestitems }
