@@ -13,11 +13,19 @@ inputs:
     description: 'Output Feedback File Folder location'
     required: true
     default: ''
+  currentlearnerchallengestatusdetails:  
+    description: 'Input of the current learner challenge status details. JSON Structure.'
+    required: true
+    default: ''
 outputs:
   passtestitems:
     description: 'List of test that Passed'
   failedtestitems:
     description: 'List of test that did not Passed'
+  learnerchallengestatus:
+    description: 'Learner Challenge Status indicates the test file name that needs to be executed.'
+  learnerchallengestatusdetails:
+    description: 'Learner Challenge Status details. JSON structure with all tests runs and currenct status with timestamp.'
 runs:
   using: 'node12'
   main: 'dist/index.js'

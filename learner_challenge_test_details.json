@@ -1,0 +1,42 @@
+{
+    "currentSection": "video_lesson.js",
+    "lastUpdatedDate": "2022-02-15T01:10:13.961Z",
+    "sectionStats": [
+        {
+            "sectionName": ["video_lesson.js"],
+            "suites": 1,
+            "tests": 6,
+            "passes": 5,
+            "pending": 0,
+            "failures": 1,
+            "start": "2022-02-15T01:09:58.194Z",
+            "end": "2022-02-15T01:10:13.961Z",
+            "duration": 15767,
+            "testsRegistered": 6,
+            "passPercent": 83.333333333,
+            "pendingPercent": 0,
+            "other": 0,
+            "hasOther": false,
+            "skipped": 0,
+            "hasSkipped": false
+        },
+        {
+            "sectionName": ["payment_checkout.js"],
+            "suites": 1,
+            "tests": 6,
+            "passes": 6,
+            "pending": 0,
+            "failures": 0,
+            "start": "2022-02-15T01:09:58.194Z",
+            "end": "2022-02-15T01:10:13.961Z",
+            "duration": 15767,
+            "testsRegistered": 6,
+            "passPercent": 100,
+            "pendingPercent": 0,
+            "other": 0,
+            "hasOther": false,
+            "skipped": 0,
+            "hasSkipped": false
+        }
+    ]
+}
