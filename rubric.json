@@ -912,11 +912,10 @@
     }
   },
   "labName": "Payments Challenge",
-  "sequences": [
+  "sequences": 
     [
       "payment_checkout.js",
       "video_lessons.js",
       "lessons_courses.js"
     ]
-  ]
 }

@@ -8,6 +8,7 @@ test('test runs', () => {
   process.env['INPUT_OUTPUTFOLDER'] = './';
   process.env['INPUT_RUBRICFILE'] = './rubric.json';
   process.env['INPUT_TESTRESULTFILE'] = './testresult.json';
+  process.env['INPUT_CURRENTLEARNERCHALLENGESTATUSDETAILS'] = './learner_challenge_test_details.json';
   const ip = path.join(__dirname, 'index.js');
   const result = cp.execSync(`node ${ip}`, {env: process.env}).toString();
   console.log(result);

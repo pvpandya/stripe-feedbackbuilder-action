@@ -7,29 +7,42 @@ const fs = require('fs').promises;
     const rubricfile = core.getInput('rubricfile', { required: true });
     const testresultfile = core.getInput('testresultfile', { required: true });
     const outputfolder = core.getInput('outputfolder', { required: true });
+    const currentdetails = core.getInput('currentlearnerchallengestatusdetails', { required: true });
     if (!rubricfile) {
       core.error('rubricfile was not set');
     }
-    let { passtestitems, failedtestitems } = await updateTestResultsInrubricfile(testresultfile, rubricfile, outputfolder);
+    if (!currentdetails) {
+      core.error('currentdetails was not set');
+    }
+    let { passtestitems, failedtestitems, learnerNextSection, learnerchallengestatusdetails } = await updateTestResultsInrubricfile(testresultfile, rubricfile, currentdetails, outputfolder);
     core.setOutput('passtestitems', passtestitems);
     core.setOutput('failedtestitems', failedtestitems);
+    core.setOutput('learnerchallengestatus', learnerNextSection);
+    core.setOutput('learnerchallengestatusdetails', learnerchallengestatusdetails);
   } catch (error) {
     core.setFailed(error.message);
   }
 })();
 
-async function updateTestResultsInrubricfile(testresultfile, rubricfile, outputfolder) {
+async function updateTestResultsInrubricfile(testresultfile, rubricfile, currentdetails, outputfolder) {
   //Read Rubric File
   let passtestitems = '';
   let passList = [];
   let failedtestitems = '';
   let failList = [];
+  let learnerNextSection = 'learnerchallengestatus';
+  let learnerchallengestatusdetails = 'learnerchallengestatusdetails';
   let sourceData = await fs.readFile(testresultfile);
   let sourceJson = JSON.parse(sourceData);
 
   //Read Test Result file
   let destinationData = await fs.readFile(rubricfile);
   let destinationJson = JSON.parse(destinationData);
+  //Read the learnerdetails
+  let learnerDetailsData = await fs.readFile(currentdetails);
+  let learnerDetailsJson = JSON.parse(learnerDetailsData);
+  let learnerCurrentSection = learnerDetailsJson.currentSection;
+
   let currentTime = Date.now();
   destinationJson.created = currentTime;
   sourceJson.results.forEach(fileresult => {
@@ -64,6 +77,7 @@ async function updateTestResultsInrubricfile(testresultfile, rubricfile, outputf
 
   if (failedtestitems === ""){
     failedtestitems = 'None';
+    learnerNextSection = getNextSection(learnerCurrentSection, destinationJson);
   }
 
   if (passtestitems === ""){
@@ -73,7 +87,18 @@ async function updateTestResultsInrubricfile(testresultfile, rubricfile, outputf
   let destinationFileName = outputfolder + '/feedbackReport_' + currentTime + '.json';
   //write to destination file
   await fs.writeFile(destinationFileName, JSON.stringify(destinationJson, null, 5));
-  return { passtestitems, failedtestitems }
+  return { passtestitems, failedtestitems, learnerNextSection, learnerchallengestatusdetails }
+}
+
+//get next section
+
+const getNextSection =(currentSection, destinationJson) => {
+  let nextSection = currentSection;
+  let curIndex = destinationJson.sequences.findIndex(i => i === currentSection);
+  if (destinationJson.sequences.length-1 >= curIndex+1) {
+    nextSection = destinationJson.sequences[curIndex+1];
+  }
+  return nextSection;
 }
 
 //sort by ascending id
