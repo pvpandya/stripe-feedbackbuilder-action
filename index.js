@@ -30,7 +30,7 @@ async function updateTestResultsInrubricfile(testresultfile, rubricfile, current
   let passList = [];
   let failedtestitems = '';
   let failList = [];
-  let learnerNextSection = 'learnerchallengestatus';
+  
   let learnerchallengestatusdetails = 'learnerchallengestatusdetails';
   let sourceData = await fs.readFile(testresultfile);
   let sourceJson = JSON.parse(sourceData);
@@ -42,6 +42,7 @@ async function updateTestResultsInrubricfile(testresultfile, rubricfile, current
   let learnerDetailsData = await fs.readFile(currentdetails);
   let learnerDetailsJson = JSON.parse(learnerDetailsData);
   let learnerCurrentSection = learnerDetailsJson.currentSection;
+  let learnerNextSection = learnerCurrentSection;
   let sourceSection = [];
   let currentTime = Date.now();
   destinationJson.created = currentTime;
@@ -84,7 +85,7 @@ async function updateTestResultsInrubricfile(testresultfile, rubricfile, current
   if (passtestitems === ""){
     passtestitems = 'None';
   }
-  let updatedLearnerDetailsJson = JSON.stringify(updateLearnerDetailsFile(learnerDetailsJson, sourceSection, sourceJson, learnerNextSection));
+  let updatedLearnerDetailsJson = JSON.stringify(updateLearnerDetailsFile(learnerDetailsJson, sourceSection, sourceJson, learnerNextSection, destinationJson));
   let destinationFileName = outputfolder + '/feedbackReport_' + currentTime + '.json';
   //write to destination file
   await fs.writeFile(destinationFileName, JSON.stringify(destinationJson, null, 5));
@@ -103,7 +104,7 @@ const getNextSection =(currentSection, destinationJson) => {
 }
 
 //Update Learner Details JSON
-const updateLearnerDetailsFile = (learnerDetailsJson, sourceSection, sourceJson, learnerNextSection) => {
+const updateLearnerDetailsFile = (learnerDetailsJson, sourceSection, sourceJson, learnerNextSection, destinationJson) => {
   let sectionStats = learnerDetailsJson.sectionStats;
   let newSectionStats = {};
   newSectionStats.sectionName = sourceSection;
