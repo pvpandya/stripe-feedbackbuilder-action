@@ -914,7 +914,7 @@
   "labName": "Payments Challenge",
   "sequences": 
     [
-      "payment_checkout.js",
+      "payments_checkout.js",
       "video_lessons.js",
       "lessons_courses.js"
     ]
