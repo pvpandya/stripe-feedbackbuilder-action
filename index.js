@@ -14,11 +14,12 @@ const fs = require('fs').promises;
     if (!currentdetails) {
       core.error('currentdetails was not set');
     }
-    let { passtestitems, failedtestitems, learnerNextSection, updatedLearnerDetailsJson } = await updateTestResultsInrubricfile(testresultfile, rubricfile, currentdetails, outputfolder);
+    let { passtestitems, failedtestitems, learnerNextSection, updatedLearnerDetailsJson, isChallengeComplete } = await updateTestResultsInrubricfile(testresultfile, rubricfile, currentdetails, outputfolder);
     core.setOutput('passtestitems', passtestitems);
     core.setOutput('failedtestitems', failedtestitems);
     core.setOutput('learnerchallengestatus', learnerNextSection);
     core.setOutput('learnerchallengestatusdetails', updatedLearnerDetailsJson);
+    core.setOutput('challengecomplete', isChallengeComplete);
   } catch (error) {
     core.setFailed(error.message);
   }
@@ -98,7 +99,7 @@ async function updateTestResultsInrubricfile(testresultfile, rubricfile, current
   let destinationFileName = outputfolder + '/feedbackReport_' + currentTime + '.json';
   //write to destination file
   await fs.writeFile(destinationFileName, JSON.stringify(destinationJson, null, 5));
-  return { passtestitems, failedtestitems, learnerNextSection, updatedLearnerDetailsJson }
+  return { passtestitems, failedtestitems, learnerNextSection, updatedLearnerDetailsJson, isChallengeComplete }
 }
 
 //get next section

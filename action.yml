@@ -26,6 +26,8 @@ outputs:
     description: 'Learner Challenge Status indicates the test file name that needs to be executed.'
   learnerchallengestatusdetails:
     description: 'Learner Challenge Status details. JSON structure with all tests runs and currenct status with timestamp.'
+  challengecomplete:
+    description: 'Boolean Indicator if the Challenge is complete.'
 runs:
   using: 'node12'
   main: 'dist/index.js'

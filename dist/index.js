@@ -3617,7 +3617,7 @@ var isPlainObject = __nccwpck_require__(3287);
 var nodeFetch = _interopDefault(__nccwpck_require__(467));
 var requestError = __nccwpck_require__(537);
 
-const VERSION = "5.6.3";
+const VERSION = "5.6.2";
 
 function getBufferResponse(response) {
   return response.arrayBuffer();
@@ -5448,17 +5448,9 @@ AbortError.prototype = Object.create(Error.prototype);
 AbortError.prototype.constructor = AbortError;
 AbortError.prototype.name = 'AbortError';
 
-const URL$1 = Url.URL || whatwgUrl.URL;
-
 // fix an issue where "PassThrough", "resolve" aren't a named export for node <10
 const PassThrough$1 = Stream.PassThrough;
-
-const isDomainOrSubdomain = function isDomainOrSubdomain(destination, original) {
-	const orig = new URL$1(original).hostname;
-	const dest = new URL$1(destination).hostname;
-
-	return orig === dest || orig[orig.length - dest.length - 1] === '.' && orig.endsWith(dest);
-};
+const resolve_url = Url.resolve;
 
 /**
  * Fetch function
@@ -5546,19 +5538,7 @@ function fetch(url, opts) {
 				const location = headers.get('Location');
 
 				// HTTP fetch step 5.3
-				let locationURL = null;
-				try {
-					locationURL = location === null ? null : new URL$1(location, request.url).toString();
-				} catch (err) {
-					// error here can only be invalid URL in Location: header
-					// do not throw when options.redirect == manual
-					// let the user extract the errorneous redirect URL
-					if (request.redirect !== 'manual') {
-						reject(new FetchError(`uri requested responds with an invalid redirect URL: ${location}`, 'invalid-redirect'));
-						finalize();
-						return;
-					}
-				}
+				const locationURL = location === null ? null : resolve_url(request.url, location);
 
 				// HTTP fetch step 5.5
 				switch (request.redirect) {
@@ -5605,12 +5585,6 @@ function fetch(url, opts) {
 							timeout: request.timeout,
 							size: request.size
 						};
-
-						if (!isDomainOrSubdomain(request.url, locationURL)) {
-							for (const name of ['authorization', 'www-authenticate', 'cookie', 'cookie2']) {
-								requestOpts.headers.delete(name);
-							}
-						}
 
 						// HTTP-redirect fetch step 9
 						if (res.statusCode !== 303 && request.body && getTotalBytes(request) === null) {
@@ -8484,11 +8458,12 @@ const fs = __nccwpck_require__(5747).promises;
     if (!currentdetails) {
       core.error('currentdetails was not set');
     }
-    let { passtestitems, failedtestitems, learnerNextSection, updatedLearnerDetailsJson } = await updateTestResultsInrubricfile(testresultfile, rubricfile, currentdetails, outputfolder);
+    let { passtestitems, failedtestitems, learnerNextSection, updatedLearnerDetailsJson, isChallengeComplete } = await updateTestResultsInrubricfile(testresultfile, rubricfile, currentdetails, outputfolder);
     core.setOutput('passtestitems', passtestitems);
     core.setOutput('failedtestitems', failedtestitems);
     core.setOutput('learnerchallengestatus', learnerNextSection);
     core.setOutput('learnerchallengestatusdetails', updatedLearnerDetailsJson);
+    core.setOutput('challengecomplete', isChallengeComplete);
   } catch (error) {
     core.setFailed(error.message);
   }
@@ -8568,7 +8543,7 @@ async function updateTestResultsInrubricfile(testresultfile, rubricfile, current
   let destinationFileName = outputfolder + '/feedbackReport_' + currentTime + '.json';
   //write to destination file
   await fs.writeFile(destinationFileName, JSON.stringify(destinationJson, null, 5));
-  return { passtestitems, failedtestitems, learnerNextSection, updatedLearnerDetailsJson }
+  return { passtestitems, failedtestitems, learnerNextSection, updatedLearnerDetailsJson, isChallengeComplete }
 }
 
 //get next section
